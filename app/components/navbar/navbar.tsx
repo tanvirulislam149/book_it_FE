@@ -4,8 +4,11 @@ import logo from "../../../app/images/logo.png";
 
 const Navbar = () => {
   return (
-    <div>
-      <nav className="bg-white shadow-sm py-4 px-6 flex justify-between items-center">
+    <div
+      style={{ boxShadow: "0px 2px 16px 0px rgba(0, 0, 0, 0.1)" }}
+      className="bg-white"
+    >
+      <nav className="py-4 px-6 flex justify-between items-center max-w-[1280] mx-auto">
         <div className="flex items-center space-x-2">
           <Image
             src={logo}
@@ -19,12 +22,12 @@ const Navbar = () => {
           <input
             id="searchInput"
             type="text"
-            placeholder="Search experiences..."
+            placeholder="Search experiences"
             className="border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-yellow-400 w-64"
           />
           <button
             id="searchButton"
-            className="bg-yellow-400 text-sm hover:bg-yellow-500 text-black px-4 py-2 rounded-lg font-semibold"
+            className="bg-yellow-400 text-sm hover:bg-yellow-500 text-black px-3 py-1 rounded-lg font-semibold"
           >
             Search
           </button>

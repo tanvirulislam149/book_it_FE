@@ -24,3 +24,7 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.yellow_color {
+  background: rgba(255, 214, 67, 1);
+}
