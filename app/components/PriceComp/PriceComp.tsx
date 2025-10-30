@@ -2,6 +2,7 @@
 import { setOrderData } from "@/Redux/OrderDataSlice";
 import { AppDispatch } from "@/Redux/store";
 import { Slot } from "@/types/experience";
+import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 
@@ -13,10 +14,15 @@ const PriceComp = ({ selectedSlot }: { selectedSlot: Slot | null }) => {
   let tax = parseInt(String(price * quantity * 0.05));
 
   const dispatch = useDispatch<AppDispatch>();
+  const router = useRouter();
 
   const data = {
     slot: selectedSlot._id,
-    price: totalPrice,
+    price: price * quantity,
+    tax: tax,
+    title: selectedSlot.experience.title,
+    date: selectedSlot.date,
+    time: selectedSlot.time,
     person: quantity,
   };
 
@@ -74,7 +80,10 @@ const PriceComp = ({ selectedSlot }: { selectedSlot: Slot | null }) => {
         </div>
 
         <button
-          onClick={() => dispatch(setOrderData(data))}
+          onClick={() => {
+            dispatch(setOrderData(data));
+            router.push("/checkout");
+          }}
           className="w-full bg-yellow-400 hover:bg-yellow-500 text-gray-800 font-medium py-2 rounded-lg"
         >
           Confirm
