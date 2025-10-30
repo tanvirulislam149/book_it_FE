@@ -1,6 +1,9 @@
 "use client";
+import { setOrderData } from "@/Redux/OrderDataSlice";
+import { AppDispatch } from "@/Redux/store";
 import { Slot } from "@/types/experience";
 import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 
 const PriceComp = ({ selectedSlot }: { selectedSlot: Slot | null }) => {
   const [quantity, setQuantity] = useState(1);
@@ -9,13 +12,15 @@ const PriceComp = ({ selectedSlot }: { selectedSlot: Slot | null }) => {
   const [totalPrice, setTotalPrice] = useState(price);
   let tax = parseInt(String(price * quantity * 0.05));
 
+  const dispatch = useDispatch<AppDispatch>();
+
   const data = {
     slot: selectedSlot._id,
     price: totalPrice,
     person: quantity,
   };
 
-  console.log(data);
+  //   console.log(data);
 
   useEffect(() => {
     tax = parseInt(String(price * quantity * 0.05));
@@ -69,7 +74,7 @@ const PriceComp = ({ selectedSlot }: { selectedSlot: Slot | null }) => {
         </div>
 
         <button
-          onClick={() => console.log(data)}
+          onClick={() => dispatch(setOrderData(data))}
           className="w-full bg-yellow-400 hover:bg-yellow-500 text-gray-800 font-medium py-2 rounded-lg"
         >
           Confirm

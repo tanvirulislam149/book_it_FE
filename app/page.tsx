@@ -12,6 +12,8 @@ export default function Home() {
   const [experiences, setExperiences] = useState<Experience[] | null>(null);
   const [loading, setLoading] = useState(true);
   const query = useSelector((state: RootState) => state.search.query);
+  const data = useSelector((state: RootState) => state.order);
+  console.log(data);
 
   useEffect(() => {
     setLoading(true);
