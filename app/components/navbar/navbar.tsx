@@ -13,6 +13,12 @@ const Navbar = () => {
   const handleSearch = () => {
     dispatch(setSearchQuery(query));
   };
+
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      handleSearch();
+    }
+  };
   return (
     <div
       style={{ boxShadow: "0px 2px 16px 0px rgba(0, 0, 0, 0.1)" }}
@@ -34,6 +40,7 @@ const Navbar = () => {
             type="text"
             placeholder="Search experiences"
             onChange={(e) => setQuery(e.target.value)}
+            onKeyDown={handleKeyPress}
             className="border border-gray-300 text-sm rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-yellow-400 w-64"
           />
           <button

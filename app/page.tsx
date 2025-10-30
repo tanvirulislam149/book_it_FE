@@ -19,22 +19,22 @@ export default function Home() {
   const [experiences, setExperiences] = useState<Experience[] | null>(null);
   const [loading, setLoading] = useState(true);
   const query = useSelector((state: RootState) => state.search.query);
-  console.log(query);
 
   useEffect(() => {
+    setLoading(true);
     axios
-      .get("http://localhost:5000/api/experience/")
+      .get(`http://localhost:5000/api/experience?title=${query}`)
       .then((res) => setExperiences(res.data))
       .catch((err) => console.log(err))
       .finally(() => setLoading(false));
-  }, []);
+  }, [query]);
 
   return (
     <div className="flex justify-center">
       <div className="max-w-[1280]">
         {loading ? (
           <Loading />
-        ) : (
+        ) : experiences?.length ? (
           <section
             className="p-8 pt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
             id="experienceGrid"
@@ -76,6 +76,8 @@ export default function Home() {
               </div>
             ))}
           </section>
+        ) : (
+          <p className="text-xl mt-14">No result found.</p>
         )}
       </div>
     </div>
