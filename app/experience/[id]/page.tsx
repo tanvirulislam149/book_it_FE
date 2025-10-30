@@ -18,6 +18,7 @@ const ExperienceDetails = ({ params }: { params: Promise<{ id: string }> }) => {
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [selectedTime, setSelectedTime] = useState<string | null>(null);
   const [selectedSlot, setSelectedSlot] = useState<Slot | null>(null);
+  const [confirm, setConfirm] = useState(false);
 
   const router = useRouter();
 
@@ -127,6 +128,7 @@ const ExperienceDetails = ({ params }: { params: Promise<{ id: string }> }) => {
                             onClick={() => {
                               setSelectedTime(s.time);
                               setSelectedSlot(s);
+                              setConfirm(true);
                             }}
                           >
                             {s.time}{" "}
@@ -161,7 +163,7 @@ const ExperienceDetails = ({ params }: { params: Promise<{ id: string }> }) => {
               </p>
             </div>
 
-            <PriceComp selectedSlot={selectedSlot || null} />
+            <PriceComp selectedSlot={selectedSlot || null} confirm={confirm} />
           </main>
         </div>
       )}

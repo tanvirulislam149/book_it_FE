@@ -5,8 +5,15 @@ import { Slot } from "@/types/experience";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
+import { toast, ToastContainer } from "react-toastify";
 
-const PriceComp = ({ selectedSlot }: { selectedSlot: Slot | null }) => {
+const PriceComp = ({
+  selectedSlot,
+  confirm,
+}: {
+  selectedSlot: Slot | null;
+  confirm: boolean;
+}) => {
   const [quantity, setQuantity] = useState(1);
   if (!selectedSlot?.experience) return null;
   const { price } = selectedSlot?.experience;
@@ -55,6 +62,7 @@ const PriceComp = ({ selectedSlot }: { selectedSlot: Slot | null }) => {
             </button>
             <span className="px-3">{quantity}</span>
             <button
+              disabled={quantity === selectedSlot.availableSeats ? true : false}
               onClick={() => setQuantity(quantity + 1)}
               className="px-2 py-1"
             >
@@ -82,13 +90,20 @@ const PriceComp = ({ selectedSlot }: { selectedSlot: Slot | null }) => {
         <button
           onClick={() => {
             dispatch(setOrderData(data));
-            router.push("/checkout");
+            if (confirm) {
+              router.push("/checkout");
+            } else {
+              toast.error("You haven't selected the time.", {
+                position: "top-center",
+              });
+            }
           }}
           className="w-full bg-yellow-400 hover:bg-yellow-500 text-gray-800 font-medium py-2 rounded-lg"
         >
           Confirm
         </button>
       </div>
+      <ToastContainer />
     </div>
   );
 };
