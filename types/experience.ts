@@ -13,6 +13,7 @@ export type Slot = {
   time: string;
   availableSeats: number;
   total_seats: number;
+  experience: Experience;
 };
 
 export type data = {

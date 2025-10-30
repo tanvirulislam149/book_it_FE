@@ -15,7 +15,7 @@ const ExperienceDetails = ({ params }: { params: Promise<{ id: string }> }) => {
   const [uniqueSlots, setUniqueSlots] = useState<Slot[]>([]);
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [selectedTime, setSelectedTime] = useState<string | null>(null);
-  console.log(uniqueSlots);
+  const [selectedSlot, setSelectedSlot] = useState<Slot | null>(null);
 
   useEffect(() => {
     setLoading(true);
@@ -24,7 +24,9 @@ const ExperienceDetails = ({ params }: { params: Promise<{ id: string }> }) => {
       .then((res) => {
         setData(res.data);
         setSelectedDate(res.data?.slots[0].date);
+        setSelectedSlot(res.data?.slots[0]);
         setUniqueSlots([
+          // setting unique slots for unique date showing
           ...new Map(res.data?.slots.map((s: Slot) => [s.date, s])).values(),
         ] as Slot[]);
       })
@@ -108,7 +110,10 @@ const ExperienceDetails = ({ params }: { params: Promise<{ id: string }> }) => {
                             selectedTime !== s.time ? "bg-gray-300" : ""
                           }`}
                           value={s.time}
-                          onClick={() => setSelectedTime(s.time)}
+                          onClick={() => {
+                            setSelectedTime(s.time);
+                            setSelectedSlot(s);
+                          }}
                         >
                           {s.time}{" "}
                           <span
@@ -142,7 +147,7 @@ const ExperienceDetails = ({ params }: { params: Promise<{ id: string }> }) => {
             </p>
           </div>
 
-          <PriceComp />
+          <PriceComp selectedSlot={selectedSlot || null} />
         </main>
       )}
     </div>
