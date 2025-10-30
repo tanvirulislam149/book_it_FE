@@ -63,9 +63,11 @@ export default function Home() {
                       <span className="text-sm font-normal">From</span> $
                       {e.price}
                     </p>
-                    <button className="bg-yellow-400 hover:bg-yellow-500 text-sm text-black px-2 py-1 rounded-sm font-semibold">
-                      <Link href={`/experience/${e._id}`}>View Details</Link>
-                    </button>
+                    <Link href={`/experience/${e._id}`}>
+                      <button className="bg-yellow-400 hover:bg-yellow-500 text-sm text-black px-2 py-1 rounded-sm font-semibold">
+                        View Details
+                      </button>
+                    </Link>
                   </div>
                 </div>
               </div>

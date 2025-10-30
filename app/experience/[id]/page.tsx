@@ -1,7 +1,7 @@
 "use client";
 import Loading from "@/app/components/Loading/loading";
 import PriceComp from "@/app/components/PriceComp/PriceComp";
-import { data } from "@/types/experience";
+import { data, Slot } from "@/types/experience";
 import axios from "axios";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
@@ -12,9 +12,10 @@ const ExperienceDetails = ({ params }: { params: Promise<{ id: string }> }) => {
 
   const [data, setData] = useState<data | null>(null);
   const [loading, setLoading] = useState(true);
+  const [uniqueSlots, setUniqueSlots] = useState<Slot[]>([]);
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [selectedTime, setSelectedTime] = useState<string | null>(null);
-  console.log(data);
+  console.log(uniqueSlots);
 
   useEffect(() => {
     setLoading(true);
@@ -23,6 +24,9 @@ const ExperienceDetails = ({ params }: { params: Promise<{ id: string }> }) => {
       .then((res) => {
         setData(res.data);
         setSelectedDate(res.data?.slots[0].date);
+        setUniqueSlots([
+          ...new Map(res.data?.slots.map((s: Slot) => [s.date, s])).values(),
+        ] as Slot[]);
       })
       .catch((err) => console.log(err))
       .finally(() => setLoading(false));
@@ -60,21 +64,17 @@ const ExperienceDetails = ({ params }: { params: Promise<{ id: string }> }) => {
             <h2 className="font-medium text-gray-800 mb-2">Choose date</h2>
             <div className="flex space-x-2 mb-6 text-sm">
               {data?.slots.length ? (
-                data?.slots.map((s, index) => (
+                uniqueSlots.map((s, index) => (
                   <button
                     key={index}
                     type="button"
                     name="dates"
                     // className="bg-yellow-400 text-black px-4 py-1 rounded-lg font-medium"
-                    className={`
-            px-4 py-2 rounded-md font-medium transition-colors
-            ${
-              selectedDate === s.date
-                ? "bg-yellow-400 text-black"
-                : "text-gray-500 border"
-            }
-            hover:${selectedDate !== s.date ? "bg-gray-300" : ""}
-          `}
+                    className={`px-4 py-2 rounded-md font-medium transition-colors ${
+                      selectedDate === s.date
+                        ? "bg-yellow-400 text-black"
+                        : "text-gray-500 border"
+                    } hover:${selectedDate !== s.date ? "bg-gray-300" : ""} `}
                     value={formatDate(s.date)}
                     onClick={() => setSelectedDate(s.date)}
                   >
@@ -89,39 +89,44 @@ const ExperienceDetails = ({ params }: { params: Promise<{ id: string }> }) => {
             <h2 className="font-medium text-gray-800 mb-2">Choose time</h2>
             <div className="flex flex-wrap gap-2 mb-6">
               {data?.slots.length ? (
-                data?.slots.map((s, index) => (
-                  <button
-                    key={index}
-                    type="button"
-                    name="time"
-                    disabled={!s.availableSeats ? true : false}
-                    // className="bg-yellow-400 text-black px-4 py-1 rounded-lg font-medium"
-                    className={`
-            px-4 py-2 rounded-md font-medium transition-colors ${
-              !s.availableSeats && "bg-gray-300 cursor-not-allowed"
-            }
-            ${
-              selectedTime === s.time
-                ? "bg-yellow-400 text-black"
-                : "text-gray-500 border"
-            }
-            hover:${selectedTime !== s.time ? "bg-gray-300" : ""}
-          `}
-                    value={s.time}
-                    onClick={() => setSelectedTime(s.time)}
-                  >
-                    {s.time}{" "}
-                    <span
-                      className={`${
-                        s.availableSeats ? "text-red-500" : "text-gray-500"
-                      } text-xs`}
-                    >
-                      {s.availableSeats
-                        ? `${s.availableSeats} left`
-                        : "Sold out"}
-                    </span>
-                  </button>
-                ))
+                data?.slots.map((s, index) => {
+                  if (s.date === selectedDate) {
+                    return (
+                      <div key={index}>
+                        <button
+                          type="button"
+                          name="time"
+                          disabled={!s.availableSeats ? true : false}
+                          className={`px-4 py-2 rounded-md font-medium transition-colors ${
+                            !s.availableSeats &&
+                            "bg-gray-300 cursor-not-allowed"
+                          } ${
+                            selectedTime === s.time
+                              ? "bg-yellow-400 text-black"
+                              : "text-gray-500 border"
+                          } hover:${
+                            selectedTime !== s.time ? "bg-gray-300" : ""
+                          }`}
+                          value={s.time}
+                          onClick={() => setSelectedTime(s.time)}
+                        >
+                          {s.time}{" "}
+                          <span
+                            className={`${
+                              s.availableSeats
+                                ? "text-red-500"
+                                : "text-gray-500"
+                            } text-xs`}
+                          >
+                            {s.availableSeats
+                              ? `${s.availableSeats} left`
+                              : "Sold out"}
+                          </span>
+                        </button>
+                      </div>
+                    );
+                  }
+                })
               ) : (
                 <p>No time available</p>
               )}
