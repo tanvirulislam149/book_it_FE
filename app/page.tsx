@@ -5,15 +5,8 @@ import { useEffect, useState } from "react";
 import Loading from "./components/Loading/loading";
 import { useSelector } from "react-redux";
 import { RootState } from "@/Redux/store";
-
-type Experience = {
-  _id: string;
-  title: string;
-  location: string;
-  description: string;
-  price: number;
-  image_url: string;
-};
+import Link from "next/link";
+import { Experience } from "@/types/experience";
 
 export default function Home() {
   const [experiences, setExperiences] = useState<Experience[] | null>(null);
@@ -46,10 +39,12 @@ export default function Home() {
                 data-name="Kayaking"
                 data-location="Udupi, Karnataka"
               >
-                <img
+                <Image
                   src={e.image_url}
                   className="w-full h-40 object-cover"
-                  alt="Kayaking in Udupi"
+                  width={500}
+                  height={500}
+                  alt="image"
                 />
                 <div className="flex flex-col grow p-4">
                   <div className="flex flex-col grow">
@@ -69,7 +64,7 @@ export default function Home() {
                       {e.price}
                     </p>
                     <button className="bg-yellow-400 hover:bg-yellow-500 text-sm text-black px-2 py-1 rounded-sm font-semibold">
-                      View Details
+                      <Link href={`/experience/${e._id}`}>View Details</Link>
                     </button>
                   </div>
                 </div>
