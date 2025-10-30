@@ -3,6 +3,8 @@ import Image from "next/image";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import Loading from "./components/Loading/loading";
+import { useSelector } from "react-redux";
+import { RootState } from "@/Redux/store";
 
 type Experience = {
   _id: string;
@@ -16,6 +18,8 @@ type Experience = {
 export default function Home() {
   const [experiences, setExperiences] = useState<Experience[] | null>(null);
   const [loading, setLoading] = useState(true);
+  const query = useSelector((state: RootState) => state.search.query);
+  console.log(query);
 
   useEffect(() => {
     axios
@@ -24,7 +28,6 @@ export default function Home() {
       .catch((err) => console.log(err))
       .finally(() => setLoading(false));
   }, []);
-  console.log(experiences);
 
   return (
     <div className="flex justify-center">
