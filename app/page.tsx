@@ -18,7 +18,7 @@ export default function Home() {
   useEffect(() => {
     setLoading(true);
     axios
-      .get(`http://localhost:5000/api/experience?title=${query}`)
+      .get(`https://book-it-o2pl.onrender.com/api/experience?title=${query}`)
       .then((res) => setExperiences(res.data))
       .catch((err) => console.log(err))
       .finally(() => setLoading(false));

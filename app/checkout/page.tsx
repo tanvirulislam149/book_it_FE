@@ -28,7 +28,7 @@ const Checkout = () => {
 
   const handlePromoValidate = () => {
     axios
-      .post("http://localhost:5000/api/promo/validate", {
+      .post("https://book-it-o2pl.onrender.com/api/promo/validate", {
         code: promo,
         price: orderData.price + orderData.tax,
       })
@@ -56,7 +56,7 @@ const Checkout = () => {
       return;
     }
     axios
-      .post("http://localhost:5000/api/bookings", {
+      .post("https://book-it-o2pl.onrender.com/api/bookings", {
         slot: orderData.slot,
         price: finalPrice,
         name,
@@ -65,7 +65,10 @@ const Checkout = () => {
         person: orderData.person,
       })
       .then((res) => {
-        console.log(res);
+        console.log(res.data);
+        if (res.data) {
+          router.push(`/bookingConfirmed/${res.data._id}`);
+        }
       })
       .catch((err) =>
         toast.error(err.response.data.message, { position: "top-center" })
@@ -82,8 +85,8 @@ const Checkout = () => {
           <FaArrowLeft />
           <p className="ml-2 font-bold">Checkout</p>
         </button>
-        <div className="flex items-start justify-between w-full">
-          <div className="bg-gray-100 w-8/12 p-5 mr-5 rounded-2xl">
+        <div className="md:flex items-start justify-between w-full">
+          <div className="bg-gray-100 w-full md:w-8/12 mb-5 p-5 mr-5 rounded-2xl">
             <div className="flex">
               <div className="w-full">
                 <label className="text-gray-500" htmlFor="">
@@ -153,7 +156,7 @@ const Checkout = () => {
               </label>
             </div>
           </div>
-          <div className="w-4/12 mx-2">
+          <div className="md:w-4/12 w-full mx-2">
             <div className="bg-gray-200 rounded-2xl shadow p-6">
               <div className="flex justify-between items-center mb-2 text-gray-600 text-sm">
                 <span>Experience</span>

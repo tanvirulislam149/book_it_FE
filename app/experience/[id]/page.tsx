@@ -25,7 +25,7 @@ const ExperienceDetails = ({ params }: { params: Promise<{ id: string }> }) => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get(`http://localhost:5000/api/experience/${id}`)
+      .get(`https://book-it-o2pl.onrender.com/api/experience/${id}`)
       .then((res) => {
         setData(res.data);
         setSelectedDate(res.data?.slots[0].date);
@@ -59,7 +59,7 @@ const ExperienceDetails = ({ params }: { params: Promise<{ id: string }> }) => {
             <p className="ml-2 font-bold">Details</p>
           </button>
           <main className="grid grid-cols-1 lg:grid-cols-3 gap-8 mx-auto">
-            <div className="lg:col-span-2 bg-white rounded-2xl shadow">
+            <div className="lg:col-span-2 bg-white rounded-2xl">
               <Image
                 src={
                   data?.experience?.image_url ||
