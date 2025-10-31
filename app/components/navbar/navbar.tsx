@@ -24,7 +24,7 @@ const Navbar = () => {
       style={{ boxShadow: "0px 2px 16px 0px rgba(0, 0, 0, 0.1)" }}
       className="bg-white"
     >
-      <nav className="py-4 px-6 flex justify-between items-center max-w-[1280] mx-auto">
+      <nav className="py-4 sm:px-6 px-2 flex justify-between items-center max-w-[1280] mx-auto">
         <div className="flex items-center space-x-2">
           <Image
             src={logo}
@@ -41,7 +41,7 @@ const Navbar = () => {
             placeholder="Search experiences"
             onChange={(e) => setQuery(e.target.value)}
             onKeyDown={handleKeyPress}
-            className="border border-gray-300 text-sm rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-yellow-400 w-64"
+            className="border border-gray-300 text-sm rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-yellow-400 w-3/4"
           />
           <button
             id="searchButton"

@@ -58,8 +58,8 @@ const ExperienceDetails = ({ params }: { params: Promise<{ id: string }> }) => {
             <FaArrowLeft />
             <p className="ml-2 font-bold">Details</p>
           </button>
-          <main className="grid grid-cols-1 lg:grid-cols-3 gap-8 mx-auto">
-            <div className="lg:col-span-2 bg-white rounded-2xl">
+          <main className="md:flex justify-between items-start mb-10 gap-8 mx-auto">
+            <div className="md:w-2/3 w-full bg-white rounded-2xl">
               <Image
                 src={
                   data?.experience?.image_url ||
@@ -162,8 +162,12 @@ const ExperienceDetails = ({ params }: { params: Promise<{ id: string }> }) => {
                 10.
               </p>
             </div>
-
-            <PriceComp selectedSlot={selectedSlot || null} confirm={confirm} />
+            <div className="md:w-1/3 w-full">
+              <PriceComp
+                selectedSlot={selectedSlot || null}
+                confirm={confirm}
+              />
+            </div>
           </main>
         </div>
       )}
