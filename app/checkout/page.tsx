@@ -15,6 +15,7 @@ const Checkout = () => {
   const [email, setEmail] = useState("");
   const [agree, setAgree] = useState(false);
   const [discount, setDiscount] = useState(0);
+  const [bookLoading, setBookLoading] = useState(false);
   const [finalPrice, setFinalPrice] = useState(orderData.price + orderData.tax); // total price
 
   const router = useRouter();
@@ -47,6 +48,7 @@ const Checkout = () => {
   };
 
   const handleBooking = () => {
+    console.log("object");
     if (!name || !email || !agree) {
       toast.error(
         "Please provide correct information and agree with term and policies.",
@@ -56,6 +58,7 @@ const Checkout = () => {
       );
       return;
     }
+    setBookLoading(true);
     axios
       .post("https://book-it-o2pl.onrender.com/api/bookings", {
         slot: orderData.slot,
@@ -69,6 +72,7 @@ const Checkout = () => {
         console.log(res.data);
         if (res.data) {
           router.push(`/bookingConfirmed/${res.data._id}`);
+          setBookLoading(false);
         }
       })
       .catch((err) =>
@@ -206,10 +210,11 @@ const Checkout = () => {
               </div>
 
               <button
+                disabled={bookLoading}
                 onClick={handleBooking}
-                className="w-full bg-yellow-400 hover:bg-yellow-500 text-gray-800 font-medium py-2 rounded-lg"
+                className="w-full bg-yellow-400 hover:bg-yellow-500 text-gray-800 font-medium py-2 rounded-lg disabled:bg-gray-400"
               >
-                Pay and Confirm
+                {bookLoading ? "Processing..." : "Pay and Confirm"}
               </button>
               <ToastContainer />
             </div>
