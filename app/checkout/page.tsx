@@ -14,6 +14,7 @@ const Checkout = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [agree, setAgree] = useState(false);
+  const [discount, setDiscount] = useState(0);
   const [finalPrice, setFinalPrice] = useState(orderData.price + orderData.tax); // total price
 
   const router = useRouter();
@@ -36,7 +37,7 @@ const Checkout = () => {
         if (res.data.success) {
           console.log(res.data.final_price);
           setFinalPrice(parseInt(res.data.final_price));
-          //   orderData.price = res.data.price;
+          setDiscount(res.data.discount);
         }
       })
       .catch((err) => {
@@ -188,6 +189,14 @@ const Checkout = () => {
                 <span>Taxes</span>
                 <span>₹{orderData.tax}</span>
               </div>
+              {discount ? (
+                <div className="flex justify-between text-gray-600 text-sm mb-3">
+                  <span>Discount</span>
+                  <span>- ₹{discount}</span>
+                </div>
+              ) : (
+                ""
+              )}
 
               <div className="border-t pt-3 mb-4">
                 <div className="flex justify-between font-semibold text-gray-800 text-lg">
