@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "@/Redux/store";
 import Link from "next/link";
 import { Experience } from "@/types/experience";
+import { CiLocationOn } from "react-icons/ci";
 
 export default function Home() {
   const [experiences, setExperiences] = useState<Experience[] | null>(null);
@@ -18,7 +19,7 @@ export default function Home() {
   useEffect(() => {
     setLoading(true);
     axios
-      .get(`https://book-it-o2pl.onrender.com/api/experience?title=${query}`)
+      .get(`http://127.0.0.1:8000/experience/`)
       .then((res) => setExperiences(res.data))
       .catch((err) => console.log(err))
       .finally(() => setLoading(false));
@@ -36,7 +37,7 @@ export default function Home() {
           >
             {experiences?.map((e: Experience) => (
               <div
-                key={e._id}
+                key={e.id}
                 className="bg-white flex flex-col h-full rounded-2xl shadow hover:shadow-lg transition overflow-hidden"
                 data-name="Kayaking"
                 data-location="Udupi, Karnataka"
@@ -50,11 +51,16 @@ export default function Home() {
                 />
                 <div className="flex flex-col grow p-4">
                   <div className="flex flex-col grow">
-                    <div className="flex justify-between items-center mb-3">
-                      <h3 className="font-semibold text-base">{e.title}</h3>
-                      <p className="text-xs text-black bg-gray-200 px-2 py-1">
-                        {e.location}
-                      </p>
+                    <div className="">
+                      <h3 className="font-semibold text-base my-1">
+                        {e.title}
+                      </h3>
+                      <div className="flex items-center">
+                        <CiLocationOn />
+                        <p className="text-sm text-black ml-1 my-1">
+                          {e.location}
+                        </p>
+                      </div>
                     </div>
                     <p className="text-sm text-gray-600 mb-3">
                       {e.description}
@@ -65,7 +71,7 @@ export default function Home() {
                       <span className="text-sm font-normal">From</span> ₹
                       {e.price}
                     </p>
-                    <Link href={`/experience/${e._id}`}>
+                    <Link href={`/experience/${e.id}`}>
                       <button className="bg-yellow-400 hover:bg-yellow-500 text-sm text-black px-2 py-1 rounded-sm font-semibold">
                         View Details
                       </button>

@@ -19,13 +19,14 @@ const ExperienceDetails = ({ params }: { params: Promise<{ id: string }> }) => {
   const [selectedTime, setSelectedTime] = useState<string | null>(null);
   const [selectedSlot, setSelectedSlot] = useState<Slot | null>(null);
   const [confirm, setConfirm] = useState(false);
+  console.log(data, selectedSlot);
 
   const router = useRouter();
 
   useEffect(() => {
     setLoading(true);
     axios
-      .get(`https://book-it-o2pl.onrender.com/api/experience/${id}`)
+      .get(`http://127.0.0.1:8000/experience/${id}/`)
       .then((res) => {
         setData(res.data);
         setSelectedDate(res.data?.slots[0].date);
