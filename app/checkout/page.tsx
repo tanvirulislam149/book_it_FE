@@ -10,7 +10,6 @@ import { ToastContainer, toast } from "react-toastify";
 const Checkout = () => {
   const orderData = useSelector((state: RootState) => state.order);
 
-  const [promo, setPromo] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [agree, setAgree] = useState(false);
@@ -26,25 +25,6 @@ const Checkout = () => {
       month: "short", // "Nov"
       day: "numeric", // 3
     });
-  };
-
-  const handlePromoValidate = () => {
-    axios
-      .post("http://127.0.0.1:8000//api/promo/validate", {
-        code: promo,
-        price: orderData.price + orderData.tax,
-      })
-      .then((res) => {
-        if (res.data.success) {
-          console.log(res.data.final_price);
-          setFinalPrice(parseInt(res.data.final_price));
-          setDiscount(res.data.discount);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-        toast.error(err.response.data.message, { position: "top-center" });
-      });
   };
 
   const handleBooking = () => {
@@ -126,28 +106,6 @@ const Checkout = () => {
                 />
               </div>
             </div>
-            <div className="flex items-start mt-4">
-              <div className="w-full mr-3">
-                <input
-                  className="bg-gray-200 text-sm rounded-lg px-4 mt-2 py-3 focus:outline-none focus:ring-2 focus:ring-gray-400 w-full"
-                  type="text"
-                  placeholder="Promo Code"
-                  value={promo}
-                  onChange={(e) => setPromo(e.target.value)}
-                  name=""
-                  id=""
-                />
-                <p style={{ fontSize: "10px" }}>
-                  Demo Code: WELCOME10, FLAT50, WINTER25
-                </p>
-              </div>
-              <button
-                onClick={handlePromoValidate}
-                className="px-4 py-2.5 mt-2 bg-black text-white rounded-lg text-base"
-              >
-                Apply
-              </button>
-            </div>
             <div className="flex items-center mt-3">
               <label className="flex items-center cursor-pointer">
                 <input
@@ -193,14 +151,6 @@ const Checkout = () => {
                 <span>Taxes</span>
                 <span>₹{orderData.tax}</span>
               </div>
-              {discount ? (
-                <div className="flex justify-between text-gray-600 text-sm mb-3">
-                  <span>Discount</span>
-                  <span>- ₹{discount}</span>
-                </div>
-              ) : (
-                ""
-              )}
 
               <div className="border-t pt-3 mb-4">
                 <div className="flex justify-between font-semibold text-gray-800 text-lg">
