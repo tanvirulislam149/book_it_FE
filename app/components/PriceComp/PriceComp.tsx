@@ -24,7 +24,7 @@ const PriceComp = ({
   const router = useRouter();
 
   const data = {
-    slot: selectedSlot._id,
+    slot: selectedSlot.id,
     price: price * quantity,
     tax: tax,
     title: selectedSlot.experience.title,

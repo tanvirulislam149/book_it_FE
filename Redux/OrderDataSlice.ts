@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface OrderState {
-  slot: string;
+  slot: number;
   title: string;
   date: Date;
   time: string;
@@ -11,7 +11,7 @@ interface OrderState {
 }
 
 const initialState: OrderState = {
-  slot: "",
+  slot: 0,
   title: "",
   date: new Date(),
   time: "",

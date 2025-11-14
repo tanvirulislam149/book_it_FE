@@ -30,7 +30,7 @@ const Checkout = () => {
 
   const handlePromoValidate = () => {
     axios
-      .post("https://book-it-o2pl.onrender.com/api/promo/validate", {
+      .post("http://127.0.0.1:8000//api/promo/validate", {
         code: promo,
         price: orderData.price + orderData.tax,
       })
@@ -60,24 +60,24 @@ const Checkout = () => {
     }
     setBookLoading(true);
     axios
-      .post("https://book-it-o2pl.onrender.com/api/bookings", {
+      .post("http://127.0.0.1:8000/booking/", {
         slot: orderData.slot,
         price: finalPrice,
         name,
         email,
-        promo,
         person: orderData.person,
       })
       .then((res) => {
         console.log(res.data);
         if (res.data) {
-          router.push(`/bookingConfirmed/${res.data._id}`);
+          router.push(`/bookingConfirmed/${res.data.id}`);
           setBookLoading(false);
         }
       })
       .catch((err) =>
         toast.error(err.response.data.message, { position: "top-center" })
-      );
+      )
+      .finally(() => setBookLoading(false));
   };
 
   return (
