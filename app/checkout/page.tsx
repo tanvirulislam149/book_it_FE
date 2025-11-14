@@ -13,7 +13,6 @@ const Checkout = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [agree, setAgree] = useState(false);
-  const [discount, setDiscount] = useState(0);
   const [bookLoading, setBookLoading] = useState(false);
   const [finalPrice, setFinalPrice] = useState(orderData.price + orderData.tax); // total price
 
@@ -54,9 +53,16 @@ const Checkout = () => {
           setBookLoading(false);
         }
       })
-      .catch((err) =>
-        toast.error(err.response.data.message, { position: "top-center" })
-      )
+      .catch((err) => {
+        console.log(err);
+        if (err.response.data.email) {
+          toast.error(err.response.data.email[0], { position: "top-center" });
+        } else if (err.response.data.non_field_errors) {
+          toast.error(err.response.data.non_field_errors[0], {
+            position: "top-center",
+          });
+        }
+      })
       .finally(() => setBookLoading(false));
   };
 

@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { use } from "react";
 import { FaArrowLeft } from "react-icons/fa";
+import format_time from "../../utils.js/format_time";
 
 const ExperienceDetails = ({ params }: { params: Promise<{ id: string }> }) => {
   const { id } = use(params);
@@ -132,7 +133,7 @@ const ExperienceDetails = ({ params }: { params: Promise<{ id: string }> }) => {
                               setConfirm(true);
                             }}
                           >
-                            {s.time}{" "}
+                            {format_time(s.time)}{" "}
                             <span
                               className={`${
                                 s.availableSeats
