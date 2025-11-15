@@ -103,39 +103,39 @@ const All_orders = () => {
                 <tbody className="bg-white divide-y divide-gray-100">
                   {bookings.map((b, index) => (
                     <tr key={b.id} className="hover:bg-gray-50">
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
+                      <td className="px-6 py-3 whitespace-nowrap text-sm text-gray-700">
                         {index + 1}
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                      <td className="px-6 py-3 whitespace-nowrap text-sm font-medium text-gray-900">
                         {b.slot.experience.title}
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
+                      <td className="px-6 py-3 whitespace-nowrap text-sm text-gray-700">
                         {b.slot.experience.location}
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
+                      <td className="px-6 py-3 whitespace-nowrap text-sm text-gray-700">
                         {b.person}
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
+                      <td className="px-6 py-3 whitespace-nowrap text-sm text-gray-700">
                         ৳ {b.price}
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
+                      <td className="px-6 py-3 whitespace-nowrap text-sm text-gray-700">
                         {b.slot.date}
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
+                      <td className="px-6 py-3 whitespace-nowrap text-sm text-gray-700">
                         {format_time(b.slot.time)}
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
+                      <td className="px-6 py-3 whitespace-nowrap text-sm text-gray-700">
                         {b.name}
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
+                      <td className="px-6 py-3 whitespace-nowrap text-sm text-gray-700">
                         {b.email}
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-base text-center">
+                      <td className="px-6 py-3 whitespace-nowrap text-base text-center">
                         <button className="text-base px-3 py-2 rounded-md bg-yellow-50 text-yellow-700 hover:bg-yellow-100">
                           <RiDeleteBinLine />
                         </button>
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-base text-center">
+                      <td className="px-6 py-3 whitespace-nowrap text-base text-center">
                         <button className="text-base px-3 py-2 rounded-md bg-yellow-50 text-yellow-700 hover:bg-yellow-100">
                           <GrUpdate />
                         </button>

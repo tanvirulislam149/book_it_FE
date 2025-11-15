@@ -30,10 +30,11 @@ const Navbar = () => {
           <Image
             src={logo}
             // className="w-8 h-8"
-            width={100}
+            width={55}
             height={55}
             alt="Logo"
           />
+          <p className="text-base">Tripzy</p>
         </div>
         <div className="flex space-x-2">
           <input
@@ -51,7 +52,14 @@ const Navbar = () => {
           >
             Search
           </button>
-          <Link href={`/all_orders`}>All Orders</Link>
+        </div>
+        <div>
+          <Link
+            className="bg-black text-white px-5 py-3 rounded-md"
+            href={`/all_orders`}
+          >
+            All Orders
+          </Link>
         </div>
       </nav>
     </div>
