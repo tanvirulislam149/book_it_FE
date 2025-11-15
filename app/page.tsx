@@ -19,7 +19,7 @@ export default function Home() {
   useEffect(() => {
     setLoading(true);
     axios
-      .get(`http://127.0.0.1:8000/experience/`)
+      .get(`http://127.0.0.1:8000/experience/?title=${query}`)
       .then((res) => setExperiences(res.data))
       .catch((err) => console.log(err))
       .finally(() => setLoading(false));
@@ -36,49 +36,54 @@ export default function Home() {
             id="experienceGrid"
           >
             {experiences?.map((e: Experience) => (
-              <div
+              <Link
                 key={e.id}
-                className="bg-white flex flex-col h-full rounded-2xl shadow hover:shadow-lg transition overflow-hidden"
-                data-name="Kayaking"
-                data-location="Udupi, Karnataka"
+                className="cursor-pointer"
+                href={`/experience/${e.id}`}
               >
-                <Image
-                  src={e.image_url}
-                  className="w-full h-40 object-cover"
-                  width={500}
-                  height={500}
-                  alt="image"
-                />
-                <div className="flex flex-col grow p-4">
-                  <div className="flex flex-col grow">
-                    <div className="">
-                      <h3 className="font-semibold text-base my-1">
-                        {e.title}
-                      </h3>
-                      <div className="flex items-center">
-                        <CiLocationOn />
-                        <p className="text-sm text-black ml-1 my-1">
-                          {e.location}
-                        </p>
+                <div
+                  className="bg-white flex flex-col h-full rounded-2xl hover:-translate-y-1.5 shadow hover:shadow-xl transition overflow-hidden"
+                  data-name="Kayaking"
+                  data-location="Udupi, Karnataka"
+                >
+                  <Image
+                    src={e.image_url}
+                    className="w-full h-40 object-cover"
+                    width={500}
+                    height={500}
+                    alt="image"
+                  />
+                  <div className="flex flex-col grow p-4">
+                    <div className="flex flex-col grow">
+                      <div className="">
+                        <h3 className="font-semibold text-base my-1">
+                          {e.title}
+                        </h3>
+                        <div className="flex items-center">
+                          <CiLocationOn />
+                          <p className="text-sm text-black ml-1 my-1">
+                            {e.location}
+                          </p>
+                        </div>
                       </div>
+                      <p className="text-sm text-gray-600 mb-3">
+                        {e.description}
+                      </p>
                     </div>
-                    <p className="text-sm text-gray-600 mb-3">
-                      {e.description}
-                    </p>
-                  </div>
-                  <div className="flex justify-between items-center mt-auto">
-                    <p className="text-gray-800 font-semibold text-xl">
-                      <span className="text-sm font-normal">From</span> ৳
-                      {e.price}
-                    </p>
-                    <Link href={`/experience/${e.id}`}>
+                    <div className="flex justify-between items-center mt-auto">
+                      <p className="text-gray-800 font-semibold text-xl">
+                        <span className="text-sm font-normal">From</span> ৳
+                        {e.price}
+                      </p>
+                      {/* <Link href={`/experience/${e.id}`}>
                       <button className="bg-yellow-400 hover:bg-yellow-500 text-sm text-black px-2 py-1 rounded-sm font-semibold">
                         View Details
                       </button>
-                    </Link>
+                    </Link> */}
+                    </div>
                   </div>
                 </div>
-              </div>
+              </Link>
             ))}
           </section>
         ) : (

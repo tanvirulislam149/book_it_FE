@@ -3,7 +3,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 interface OrderState {
   slot: number;
   title: string;
-  date: Date;
+  date: string;
   time: string;
   price: number;
   tax: number;
@@ -13,7 +13,7 @@ interface OrderState {
 const initialState: OrderState = {
   slot: 0,
   title: "",
-  date: new Date(),
+  date: "",
   time: "",
   price: 0,
   tax: 0,

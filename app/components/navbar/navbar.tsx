@@ -26,16 +26,18 @@ const Navbar = () => {
       className="bg-white"
     >
       <nav className="py-4 sm:px-6 px-2 flex justify-between items-center max-w-[1280] mx-auto">
-        <div className="flex items-center space-x-2">
-          <Image
-            src={logo}
-            // className="w-8 h-8"
-            width={55}
-            height={55}
-            alt="Logo"
-          />
-          <p className="text-base">Tripzy</p>
-        </div>
+        <Link href={"/"}>
+          <div className="flex items-center space-x-2">
+            <Image
+              src={logo}
+              // className="w-8 h-8"
+              width={55}
+              height={55}
+              alt="Logo"
+            />
+            <p className="text-base">Tripzy</p>
+          </div>
+        </Link>
         <div className="flex space-x-2">
           <input
             id="searchInput"
