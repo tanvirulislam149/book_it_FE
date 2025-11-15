@@ -5,6 +5,7 @@ import logo from "../../../app/images/logo.png";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/Redux/store";
 import { setSearchQuery } from "@/Redux/searchSlice";
+import Link from "next/link";
 
 const Navbar = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -50,6 +51,7 @@ const Navbar = () => {
           >
             Search
           </button>
+          <Link href={`/all_orders`}>All Orders</Link>
         </div>
       </nav>
     </div>

@@ -68,7 +68,7 @@ export default function Home() {
                   </div>
                   <div className="flex justify-between items-center mt-auto">
                     <p className="text-gray-800 font-semibold text-xl">
-                      <span className="text-sm font-normal">From</span> ₹
+                      <span className="text-sm font-normal">From</span> ৳
                       {e.price}
                     </p>
                     <Link href={`/experience/${e.id}`}>

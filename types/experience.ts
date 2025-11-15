@@ -20,3 +20,22 @@ export type data = {
   experience: Experience;
   slots: Slot[];
 };
+
+export type Bookings = {
+  email: string;
+  id: number;
+  name: string;
+  person: number;
+  price: number;
+  slot: {
+    date: string;
+    time: string;
+    id: number;
+    experience: {
+      id: number;
+      location: string;
+      price: number;
+      title: string;
+    };
+  };
+};
