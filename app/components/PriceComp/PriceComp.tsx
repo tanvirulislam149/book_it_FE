@@ -51,7 +51,7 @@ const PriceComp = ({
         </div>
 
         <div className="flex justify-between items-center mb-2 text-gray-600 text-sm">
-          <span>Quantity</span>
+          <span>Person</span>
           <div className="flex items-center border rounded-lg overflow-hidden">
             <button
               disabled={quantity === 1 ? true : false}

@@ -9,7 +9,7 @@ export type Experience = {
 
 export type Slot = {
   id: number;
-  date: Date;
+  date: string;
   time: string;
   availableSeats: number;
   total_seats: number;

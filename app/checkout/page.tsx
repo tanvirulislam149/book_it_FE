@@ -6,6 +6,7 @@ import React, { useState } from "react";
 import { FaArrowLeft } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
+import format_time from "../utils.js/format_time";
 
 const Checkout = () => {
   const orderData = useSelector((state: RootState) => state.order);
@@ -19,7 +20,7 @@ const Checkout = () => {
   const router = useRouter();
   console.log(orderData);
 
-  const formatDate = (date: Date) => {
+  const formatDate = (date: string) => {
     return new Date(date).toLocaleDateString("en-US", {
       month: "short", // "Nov"
       day: "numeric", // 3
@@ -139,11 +140,13 @@ const Checkout = () => {
               </div>
               <div className="flex justify-between items-center mb-2 text-gray-600 text-sm">
                 <span>Time</span>
-                <span className="text-gray-800">{orderData.time}</span>
+                <span className="text-gray-800">
+                  {format_time(orderData.time)}
+                </span>
               </div>
 
               <div className="flex justify-between items-center mb-2 text-gray-600 text-sm">
-                <span>Qty</span>
+                <span>Person</span>
                 <div className="flex items-center rounded-lg overflow-hidden">
                   {orderData.person}
                 </div>
