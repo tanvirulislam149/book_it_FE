@@ -5,13 +5,15 @@ import React, { useEffect, useState } from "react";
 import format_time from "../utils.js/format_time";
 import { RiDeleteBinLine } from "react-icons/ri";
 import { GrUpdate } from "react-icons/gr";
+import Modal from "../components/Modal/DeleteModal";
 
 const All_orders = () => {
   const [loading, setLoading] = useState(false);
   const [bookings, setBookings] = useState<Bookings[]>([]);
-  console.log(bookings);
+  const [open, setOpen] = useState(false);
+  const [deleteId, setDeleteId] = useState(0);
 
-  useEffect(() => {
+  const get_bookings = () => {
     setLoading(true);
     axios
       .get(`http://127.0.0.1:8000/booking/`)
@@ -20,6 +22,10 @@ const All_orders = () => {
       })
       .catch((err) => console.log(err))
       .finally(() => setLoading(false));
+  };
+
+  useEffect(() => {
+    get_bookings();
   }, []);
   return (
     <div>
@@ -131,7 +137,13 @@ const All_orders = () => {
                         {b.email}
                       </td>
                       <td className="px-6 py-3 whitespace-nowrap text-base text-center">
-                        <button className="text-base px-3 py-2 rounded-md bg-yellow-50 text-yellow-700 hover:bg-yellow-100">
+                        <button
+                          onClick={() => {
+                            setOpen(true);
+                            setDeleteId(b.id);
+                          }}
+                          className="text-base px-3 py-2 rounded-md bg-yellow-50 text-yellow-700 hover:bg-yellow-100"
+                        >
                           <RiDeleteBinLine />
                         </button>
                       </td>
@@ -144,6 +156,12 @@ const All_orders = () => {
                   ))}
                 </tbody>
               </table>
+              <Modal
+                open={open}
+                setOpen={setOpen}
+                id={deleteId}
+                get_bookings={get_bookings}
+              />
             </div>
           </div>
         </div>
