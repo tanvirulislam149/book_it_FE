@@ -6,12 +6,16 @@ import format_time from "../utils.js/format_time";
 import { RiDeleteBinLine } from "react-icons/ri";
 import { GrUpdate } from "react-icons/gr";
 import Modal from "../components/Modal/DeleteModal";
+import UpdateModal from "../components/Modal/UpdateModal";
 
 const All_orders = () => {
   const [loading, setLoading] = useState(false);
   const [bookings, setBookings] = useState<Bookings[]>([]);
   const [open, setOpen] = useState(false);
+  const [updateOpen, setUpdateOpen] = useState(false);
   const [deleteId, setDeleteId] = useState(0);
+  const [updateBooking, setUpdateBooking] = useState<Bookings>();
+  console.log(bookings);
 
   const get_bookings = () => {
     setLoading(true);
@@ -148,7 +152,13 @@ const All_orders = () => {
                         </button>
                       </td>
                       <td className="px-6 py-3 whitespace-nowrap text-base text-center">
-                        <button className="text-base px-3 py-2 rounded-md bg-yellow-50 text-yellow-700 hover:bg-yellow-100">
+                        <button
+                          onClick={() => {
+                            setUpdateOpen(true);
+                            setUpdateBooking(b);
+                          }}
+                          className="text-base px-3 py-2 rounded-md bg-yellow-50 text-yellow-700 hover:bg-yellow-100"
+                        >
                           <GrUpdate />
                         </button>
                       </td>
@@ -162,6 +172,14 @@ const All_orders = () => {
                 id={deleteId}
                 get_bookings={get_bookings}
               />
+              {updateOpen && updateBooking && (
+                <UpdateModal
+                  open={updateOpen}
+                  setOpen={setUpdateOpen}
+                  get_bookings={get_bookings}
+                  updateBooking={updateBooking}
+                />
+              )}
             </div>
           </div>
         </div>

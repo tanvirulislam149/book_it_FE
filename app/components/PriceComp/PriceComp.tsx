@@ -46,7 +46,7 @@ const PriceComp = ({
         <div className="flex justify-between items-center mb-2 text-gray-600 text-sm">
           <span>Starts at</span>
           <span className="font-semibold text-gray-800">
-            ₹{price * quantity}
+            ৳{price * quantity}
           </span>
         </div>
 
@@ -73,17 +73,17 @@ const PriceComp = ({
 
         <div className="flex justify-between text-gray-600 text-sm mb-1">
           <span>Subtotal</span>
-          <span>₹{price * quantity}</span>
+          <span>৳{price * quantity}</span>
         </div>
         <div className="flex justify-between text-gray-600 text-sm mb-3">
           <span>Taxes</span>
-          <span>₹{tax}</span>
+          <span>৳{tax}</span>
         </div>
 
         <div className="border-t pt-3 mb-4">
           <div className="flex justify-between font-semibold text-gray-800 text-lg">
             <span>Total</span>
-            <span>₹{totalPrice}</span>
+            <span>৳{totalPrice}</span>
           </div>
         </div>
 

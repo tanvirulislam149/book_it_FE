@@ -31,6 +31,7 @@ export type Bookings = {
     date: string;
     time: string;
     id: number;
+    availableSeats: number;
     experience: {
       id: number;
       location: string;

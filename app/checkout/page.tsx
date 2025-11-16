@@ -154,17 +154,17 @@ const Checkout = () => {
 
               <div className="flex justify-between text-gray-600 text-sm mb-1">
                 <span>Subtotal</span>
-                <span>₹{orderData.price}</span>
+                <span>৳{orderData.price}</span>
               </div>
               <div className="flex justify-between text-gray-600 text-sm mb-3">
                 <span>Taxes</span>
-                <span>₹{orderData.tax}</span>
+                <span>৳{orderData.tax}</span>
               </div>
 
               <div className="border-t pt-3 mb-4">
                 <div className="flex justify-between font-semibold text-gray-800 text-lg">
                   <span>Total</span>
-                  <span>₹{finalPrice}</span>
+                  <span>৳{finalPrice}</span>
                 </div>
               </div>
 
